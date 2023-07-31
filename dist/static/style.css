@@ -1,0 +1,143 @@
+* {
+    /* 初始化 */
+    margin: 0;
+    padding: 0;
+}
+
+.content {
+    width: 100vw;
+    /* 100%窗口高度 */
+    height: 100vh;
+
+    background: url(./banner.png) no-repeat;
+
+    /* 背景大小 */
+    background-size: cover;
+
+    /* 弹性布局 水平居中 垂直居中*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-content {
+    /* 相对定位 */
+    position: relative;
+    width: 800px;
+    height: 300px;
+    /* 背景渐变色 */
+    background: linear-gradient(to right bottom,#6ec6ca,#fec9c9);
+    /* 圆角边框 */
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.banner-box {
+    display: inline-block;
+    width:500px;
+    height: 100%;  
+    background: url(./banner.png) no-repeat;
+    background-size: cover;
+    border-radius: 20px 0 0 20px;
+}
+
+.login-box  {
+    /* 绝对定位 */
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 330px;
+    height: 100%;
+
+    border-radius: 0 20px 20px 0;
+
+    /* 弹性布局 */
+    display: flex;
+    /* 变成上下排列 */
+    flex-direction: column;
+    /* 居中 */
+    align-items: center;
+}
+
+.login-box>h1 {
+    font-size: 36px;
+    margin: 60px 0;
+    color: #fff;
+}
+
+.login-box>input {
+    margin-bottom: 20px;
+    width: 200px;
+    height: 36px;
+    padding: 0 20px;
+    border-radius: 36px;
+
+    /* 取消边框 */
+    border: none;
+
+    /* 点进去也会有个边框，取消掉 */
+    outline: none;
+
+    font-size: 18px;
+
+}
+
+.login-btn {
+    margin-top: 20px;
+    width: 100px;
+    height: 40px;
+    background-color: rgb(34, 15, 201);
+    color:#fff;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    display: inline;
+}
+
+.register-btn {
+    margin-top: 20px;
+    margin-left: 28px;
+    width: 100px;
+    height: 40px;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    display: inline;
+}
+
+@media screen and (max-width:900px) {
+    .login-content {
+        margin: 0 30px;
+    }
+
+    .banner-box {
+        border-radius: 20px;
+    }
+
+    .login-box {
+        background-color: rgba(160, 129, 175, 0.5);
+    }
+}
+
+@media screen and (max-width:600px) {
+    .content {
+        background: url(./banner.png);
+    }
+
+    .login-content {
+        background-color: transparent;
+    }
+
+    .banner-box {
+        display: none;
+    }
+
+    .login-box {
+        /* 设置该属性为默认值 */
+        position: initial;
+        margin: -40 auto;
+        background-color: transparent;
+    }
+}
