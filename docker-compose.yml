@@ -1,0 +1,55 @@
+version: '3'
+services:
+  mailwebhook:
+    depends_on:
+     - redis_server_mailwebhook
+     - db_mailwebhook
+    image: huiwushi/mailans 
+    container_name: mailwebhook
+    volumes:
+     #- ./src:/root/svr/src:rw
+     - ./env.conf:/root/svr/src/env.conf
+    ports:
+     - "0.0.0.0:1099:80"
+     - "0.0.0.0:25:25"
+    #restart: always
+    environment:
+     REDIS_NAME: redis_server_mailwebhook
+
+  redis_server_mailwebhook:
+    image: redis:latest
+    restart: always
+    container_name: redis_server_mailwebhook
+    volumes:
+      - ./redis.conf:/etc/redis/redis.conf
+    command: redis-server /etc/redis/redis.conf
+    privileged: true
+
+  db_mailwebhook:
+    container_name: db_mailwebhook
+    image: mysql:5.7
+    volumes:
+     - ./db:/var/lib/mysql:rw
+     - ./mysql_init:/docker-entrypoint-initdb.d/
+    restart: always
+    ports:
+     - "0.0.0.0:3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: MySqlPwdx22223
+      MYSQL_DATABASE: mailwebhook 
+      MYSQL_USER: mytest
+      MYSQL_PASSWORD: MySqlPwdx22223
+
+  nginx_mailwebhook:
+    container_name: nginx_mailwebhook
+    image: nginx
+    restart: always
+    ports:
+      - 3080:80
+      - 3443:443
+    privileged: true
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./html:/usr/share/nginx/html
+      - ./logs:/var/log/nginx
+
